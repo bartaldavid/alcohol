@@ -1,0 +1,56 @@
+:root {
+  font-family: -apple-system, "Segoe UI", "Roboto", "Helvetica Neue",
+    "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+.drinks-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin: 1rem;
+}
+
+.form-container {
+  display: flex;
+  padding: 2rem;
+  margin: 1rem;
+  justify-content: space-around;
+  align-items: center;
+  flex-flow: column-reverse wrap;
+  border-radius: 1rem;
+  background-color: #fafafa;
+}
+
+@media (min-width: 576px) {
+  .drinks-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .form-container {
+    flex-flow: row nowrap;
+  }
+}
+
+/* tablet */
+@media (min-width: 768px) {
+  .form-container {
+    margin: 3rem;
+  }
+  .drinks-container {
+    margin: 3rem;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* desktop */
+@media (min-width: 992px) {
+  .drinks-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

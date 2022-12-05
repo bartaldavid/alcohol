@@ -1,0 +1,77 @@
+legend,
+fieldset,
+select,
+textarea,
+input,
+button {
+  appearance: none;
+  border: none;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  background-color: white;
+  padding: 0.3rem;
+  margin: 0.3rem;
+  border-radius: 0.2rem;
+  border: 0.1rem solid #f0f0f0;
+  width: 10rem;
+}
+
+input {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.input-text {
+  display: flex;
+  color: darkgray;
+}
+
+.input-wrapper:hover {
+  border-color: lightgray;
+}
+
+.input-wrapper input {
+  background: transparent;
+}
+
+button[type="submit"] {
+  padding: 1rem;
+  margin: 0.5rem 0;
+  justify-self: center;
+  width: 7rem;
+  border-radius: 0.3rem;
+}
+
+button:hover {
+  background-color: lightgray;
+}
+
+form > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+#score-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0;
+}
+
+#score-div h1 {
+  margin-bottom: 0.5rem;
+  font-size: 4em;
+}
+#score-div p {
+  margin-top: 0.5rem;
+}
