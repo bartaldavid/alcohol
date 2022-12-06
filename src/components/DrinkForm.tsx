@@ -30,7 +30,8 @@ const DrinkForm = ({ saveDrinkToArray }: any) => {
 
   const handleQuantityChange = (value: number) => {
     setForm({ ...form, ["quantity"]: value });
-    console.log(value);
+    updateScore({ ...form, ["quantity"]: value });
+    // console.log(value);
   };
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
