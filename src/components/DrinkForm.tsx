@@ -79,7 +79,6 @@ const DrinkForm = ({ saveDrinkToArray }: any) => {
           <div className="input-wrapper">
             <input
               type="number"
-              inputMode="numeric"
               id="alcoholContent"
               value={form.alcoholContent}
               onChange={handleNumChange}
