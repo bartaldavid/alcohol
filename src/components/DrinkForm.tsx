@@ -80,6 +80,7 @@ const DrinkForm = ({ saveDrinkToArray }: any) => {
             <input
               type="number"
               id="alcoholContent"
+              step={0.1}
               value={form.alcoholContent}
               onChange={handleNumChange}
               autoComplete="off"
