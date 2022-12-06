@@ -9,10 +9,12 @@ const DrinkForm = ({ saveDrinkToArray }: any) => {
   const [score, setScore] = useState(0);
 
   const calcScore = (drink: Drink) => {
-    return +(
-      (drink.price * 10000) /
-      (drink.quantity * drink.alcoholContent)
-    ).toFixed(0);
+    if (drink.price && drink.quantity && drink.alcoholContent) {
+      return +(
+        (drink.price * 10000) /
+        (drink.quantity * drink.alcoholContent)
+      ).toFixed(0);
+    } else return 0;
   };
 
   const updateScore = (data: Drink) => {
@@ -60,7 +62,9 @@ const DrinkForm = ({ saveDrinkToArray }: any) => {
           <label htmlFor="quantity">Quantity</label>
           <div className="input-wrapper">
             <input
-              type="number"
+              type="text"
+              inputMode="numeric"
+              pattern="\d*"
               id="quantity"
               value={form.quantity}
               autoComplete="off"
@@ -75,12 +79,11 @@ const DrinkForm = ({ saveDrinkToArray }: any) => {
           <div className="input-wrapper">
             <input
               type="number"
+              inputMode="numeric"
               id="alcoholContent"
               value={form.alcoholContent}
               onChange={handleNumChange}
               autoComplete="off"
-              min="0"
-              max={100}
             />
             <span className="input-text">%</span>
           </div>
@@ -89,7 +92,9 @@ const DrinkForm = ({ saveDrinkToArray }: any) => {
           <label htmlFor="price">Price</label>
           <div className="input-wrapper">
             <input
-              type="number"
+              type="text"
+              inputMode="numeric"
+              pattern="\d*"
               autoComplete="off"
               id="price"
               value={form.price}

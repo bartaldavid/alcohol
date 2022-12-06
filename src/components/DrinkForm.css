@@ -23,6 +23,7 @@ input {
 
 .input-text {
   display: flex;
+  align-items: baseline;
   color: darkgray;
 }
 
