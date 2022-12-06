@@ -2,6 +2,7 @@ import React, { FormEvent, useState } from "react";
 import Drink from "../Drink";
 import { v4 as uuidv4 } from "uuid";
 import "./DrinkForm.css";
+import QuantityChooser from "./QuantityChooser";
 
 const DrinkForm = ({ saveDrinkToArray }: any) => {
   const [form, setForm] = useState(new Drink());
@@ -22,8 +23,14 @@ const DrinkForm = ({ saveDrinkToArray }: any) => {
     setForm({ ...form, [event.target.id]: Number(event.target.value) });
     updateScore({ ...form, [event.target.id]: Number(event.target.value) });
   };
+
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [event.target.id]: event.target.value });
+  };
+
+  const handleQuantityChange = (value: number) => {
+    setForm({ ...form, ["quantity"]: value });
+    console.log(value);
   };
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -61,6 +68,7 @@ const DrinkForm = ({ saveDrinkToArray }: any) => {
             <span className="input-text">ml</span>
           </div>
         </div>
+        <QuantityChooser handleQuantityChange={handleQuantityChange} />
         <div>
           <label htmlFor="alcoholContent">Alcohol content</label>
           <div className="input-wrapper">
@@ -89,7 +97,6 @@ const DrinkForm = ({ saveDrinkToArray }: any) => {
             <span className="input-text">Ft</span>
           </div>
         </div>
-        <br />
         <button type="submit">Save</button>
       </form>
       <div id="score-div">

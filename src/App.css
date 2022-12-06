@@ -4,12 +4,6 @@
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
-*,
-::after,
-::before {
-  box-sizing: border-box;
-}
-
 .drinks-container {
   display: grid;
   grid-template-columns: 1fr;
@@ -26,6 +20,18 @@
   flex-flow: column-reverse wrap;
   border-radius: 1rem;
   background-color: #fafafa;
+}
+
+#clear-all-div {
+  display: flex;
+  justify-content: center;
+}
+
+#clear-all-button {
+  padding: 1rem 3rem;
+  margin-bottom: 2rem;
+  border-radius: 0.3rem;
+  color: red;
 }
 
 @media (min-width: 576px) {

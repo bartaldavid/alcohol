@@ -1,12 +1,6 @@
-legend,
-fieldset,
-select,
-textarea,
 input,
 button {
-  appearance: none;
   border: none;
-  box-sizing: border-box;
   outline: none;
 }
 
@@ -42,7 +36,7 @@ input {
 
 button[type="submit"] {
   padding: 1rem;
-  margin: 0.5rem 0;
+  margin: 1rem 0;
   justify-self: center;
   width: 7rem;
   border-radius: 0.3rem;
