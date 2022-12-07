@@ -1,8 +1,8 @@
 import React, { FormEvent, useState } from "react";
-import Drink from "../Drink";
+import Drink from "../../Drink";
 import { v4 as uuidv4 } from "uuid";
 import "./DrinkForm.css";
-import QuantityChooser from "./QuantityChooser";
+import QuantityChooser from "../QuantityChooser";
 
 const DrinkForm = ({ saveDrinkToArray }: any) => {
   const [form, setForm] = useState(new Drink());
@@ -36,18 +36,17 @@ const DrinkForm = ({ saveDrinkToArray }: any) => {
     // console.log(value);
   };
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     updateScore(form);
     saveDrinkToArray({ ...form, id: uuidv4(), score: calcScore(form) });
-  }
+  };
 
   return (
     <>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name">Title</label>
-
           <div className="input-wrapper">
             <input
               type="text"

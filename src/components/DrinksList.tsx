@@ -1,6 +1,5 @@
 import StoredDrink from "../StoredDrink";
-import DrinkCard from "./DrinkCard";
-import React from "react";
+import DrinkCard from "./DrinkCard/DrinkCard";
 
 type Props = { drinks: StoredDrink[] };
 

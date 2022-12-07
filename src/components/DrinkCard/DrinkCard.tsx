@@ -1,4 +1,4 @@
-import StoredDrink from "../StoredDrink";
+import StoredDrink from "../../StoredDrink";
 import React from "react";
 import "./DrinkCard.css";
 
