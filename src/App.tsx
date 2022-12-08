@@ -1,7 +1,7 @@
 import "normalize.css";
 import "./App.css";
 import DrinkForm from "./components/DrinkForm/DrinkForm";
-import DrinksList from "./components/DrinksList";
+import DrinkCard from "./components/DrinkCard/DrinkCard";
 import { useState, useEffect } from "react";
 import StoredDrink from "./StoredDrink";
 import { GiTrashCan } from "react-icons/gi";
@@ -22,10 +22,10 @@ function App() {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(drinks));
   }, [drinks]);
 
-  function saveDrinkToArray(currentDrink: StoredDrink) {
+  const saveDrinkToArray = (currentDrink: StoredDrink) => {
     setDrinks((prevDrinks) => [...prevDrinks, currentDrink]);
     // console.log(currentDrink);
-  }
+  };
 
   const handleClearAll = () => {
     setDrinks([]);
@@ -37,7 +37,9 @@ function App() {
         <DrinkForm saveDrinkToArray={saveDrinkToArray} />
       </div>
       <div className="drinks-container">
-        <DrinksList drinks={drinks} />
+        {drinks.map((drink: StoredDrink) => {
+          return <DrinkCard key={drink.id} drink={drink} />;
+        })}
       </div>
       {drinks.length > 0 && (
         <div id="clear-all-div">
