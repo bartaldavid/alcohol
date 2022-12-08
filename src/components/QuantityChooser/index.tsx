@@ -2,12 +2,14 @@ import React from "react";
 import QCData from "./QCData";
 import "./QuantityChooser.css";
 
-type Props = { handleQuantityChange: Function };
+interface Props {
+  handleQuantityChange: Function;
+}
 
-const QuantityChooser = ({ handleQuantityChange }: Props) => {
+const QuantityChooser = ({ handleQuantityChange }: Props): JSX.Element => {
   const handleQuantityChoice = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
+  ): void => {
     handleQuantityChange(event.currentTarget.value);
   };
 
@@ -21,7 +23,8 @@ const QuantityChooser = ({ handleQuantityChange }: Props) => {
         className="quantity-chooser-button"
       >
         <>
-          {/* <value.logo /> TODO ez valamiért elrontja */}
+          {/* TODO ettől telefonon nem responsive */}
+          {value.logo}
           {value.label}
         </>
       </button>

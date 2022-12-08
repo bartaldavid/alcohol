@@ -4,42 +4,55 @@ import { v4 as uuidv4 } from "uuid";
 import "./DrinkForm.css";
 import QuantityChooser from "../QuantityChooser";
 
-const DrinkForm = ({ saveDrinkToArray }: any) => {
-  const [form, setForm] = useState(new Drink());
+const DrinkForm = ({ saveDrinkToArray }: any): JSX.Element => {
+  // TODO make this initial value null
+  const [form, setForm] = useState<Drink>({});
+  // const [form, setForm] = useState<Drink>({
+  //   name: "",
+  //   quantity: 0,
+  //   alcoholContent: 0,
+  //   price: 1,
+  // });
   const [score, setScore] = useState(0);
 
-  const calcScore = (drink: Drink) => {
+  const updateScore = (drink: Drink): void => {
+    // FIXME should this be fixed?
     if (drink.price && drink.quantity && drink.alcoholContent) {
-      return +(
-        (drink.price * 10000) /
-        (drink.quantity * drink.alcoholContent)
-      ).toFixed(0);
-    } else return 0;
+      setScore(
+        +(
+          (drink.price * 10000) /
+          (drink.quantity * drink.alcoholContent)
+        ).toFixed(0)
+      );
+    } else {
+      setScore(0);
+    }
   };
 
-  const updateScore = (data: Drink) => {
-    setScore(calcScore(data));
+  const handleFormChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    let newValue;
+    if (event.currentTarget.id === "name") {
+      newValue = event.currentTarget.value;
+    } else {
+      newValue = Number(event.currentTarget.value);
+    }
+    setForm({ ...form, [event.target.id]: newValue });
+    updateScore({ ...form, [event.target.id]: newValue });
   };
 
-  const handleNumChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [event.target.id]: Number(event.target.value) });
-    updateScore({ ...form, [event.target.id]: Number(event.target.value) });
-  };
-
-  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [event.target.id]: event.target.value });
-  };
-
-  const handleQuantityChange = (value: number) => {
-    setForm({ ...form, ["quantity"]: value });
-    updateScore({ ...form, ["quantity"]: value });
+  // this could also be combined into the function above
+  const handleQuantityChange = (value: number): void => {
+    setForm({ ...form, quantity: value });
+    updateScore({ ...form, quantity: value });
     // console.log(value);
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    updateScore(form);
-    saveDrinkToArray({ ...form, id: uuidv4(), score: calcScore(form) });
+    // updateScore(form); this might be unneccessary
+    saveDrinkToArray({ ...form, id: uuidv4(), score });
   };
 
   return (
@@ -52,7 +65,7 @@ const DrinkForm = ({ saveDrinkToArray }: any) => {
               type="text"
               id="name"
               value={form.name}
-              onChange={handleNameChange}
+              onChange={handleFormChange}
               autoComplete="off"
             />
           </div>
@@ -67,7 +80,7 @@ const DrinkForm = ({ saveDrinkToArray }: any) => {
               id="quantity"
               value={form.quantity}
               autoComplete="off"
-              onChange={handleNumChange}
+              onChange={handleFormChange}
             />
             <span className="input-text">ml</span>
           </div>
@@ -80,8 +93,9 @@ const DrinkForm = ({ saveDrinkToArray }: any) => {
               type="number"
               id="alcoholContent"
               step={0.1}
+              min={0}
               value={form.alcoholContent}
-              onChange={handleNumChange}
+              onChange={handleFormChange}
               autoComplete="off"
             />
             <span className="input-text">%</span>
@@ -97,7 +111,7 @@ const DrinkForm = ({ saveDrinkToArray }: any) => {
               autoComplete="off"
               id="price"
               value={form.price}
-              onChange={handleNumChange}
+              onChange={handleFormChange}
             />
             <span className="input-text">Ft</span>
           </div>

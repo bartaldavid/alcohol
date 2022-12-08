@@ -4,8 +4,8 @@
 
 Overall this is really nice stuff, especially for one of the first TypeScript projects, and one of the first React projects!
 GOOO MAN B)
-
-It is a good idea to use Prettier and ESLint with VSCode, so your code will be universally formatted, and follows best practices in all places.
+s a good idea to use Prettier and ESLint with VSCode, so your code will be universally formatted, and follows best practices in all places.
+It i
 Read about installation here:
 https://prettier.io/docs/en/install.html
 https://github.com/prettier/eslint-config-prettier#installation
@@ -54,7 +54,7 @@ const [form, setForm] = useState<Drink>({name: '', quantity: 0, alcoholContent: 
 ## DrinkForm
 
 - Style and code is very nicely separeted, folder structure is nice, and the JSX is also pretty straightforward here! Well done!
-- Thin about how you can refactor all those small function into something more simple, and more generic.
+- Think about how you can refactor all those small function into something more simple, and more generic.
 - Extra kudos for properly typing React event props, and for `event.preventDefault()`!
 
 ## DrinkCard

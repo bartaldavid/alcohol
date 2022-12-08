@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import "normalize.css";
 import "./App.css";
 import DrinkForm from "./components/DrinkForm/DrinkForm";
@@ -8,27 +9,23 @@ import { GiTrashCan } from "react-icons/gi";
 
 const LOCAL_STORAGE_KEY: string = "alcholapp.drinks";
 
-function App() {
+function App(): JSX.Element {
   const [drinks, setDrinks] = useState<StoredDrink[]>([]);
 
   useEffect(() => {
     const storedDrinks: StoredDrink[] = JSON.parse(
-      localStorage.getItem(LOCAL_STORAGE_KEY) || "{}"
+      localStorage.getItem(LOCAL_STORAGE_KEY) ?? "{}"
     );
-    if (storedDrinks) setDrinks((prev) => [...prev, ...storedDrinks]);
+    if (storedDrinks.length !== 0) setDrinks(() => [...storedDrinks]);
   }, []);
 
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(drinks));
   }, [drinks]);
 
-  const saveDrinkToArray = (currentDrink: StoredDrink) => {
+  const saveDrinkToArray = (currentDrink: StoredDrink): void => {
     setDrinks((prevDrinks) => [...prevDrinks, currentDrink]);
     // console.log(currentDrink);
-  };
-
-  const handleClearAll = () => {
-    setDrinks([]);
   };
 
   return (
@@ -43,7 +40,7 @@ function App() {
       </div>
       {drinks.length > 0 && (
         <div id="clear-all-div">
-          <button onClick={handleClearAll} id="clear-all-button">
+          <button onClick={() => setDrinks([])} id="clear-all-button">
             <GiTrashCan /> Clear all
           </button>
         </div>

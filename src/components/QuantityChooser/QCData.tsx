@@ -1,9 +1,11 @@
+/* eslint-disable react/react-in-jsx-scope */
 import {
   GiBeerBottle,
   GiGlassShot,
   GiWineBottle,
   GiWineGlass,
 } from "react-icons/gi";
+import { IoBeerOutline } from "react-icons/io5";
 
 export default [
   {
@@ -24,7 +26,7 @@ export default [
   {
     label: "500 ml",
     value: 500,
-    logo: <GiBeerBottle />,
+    logo: <IoBeerOutline />,
   },
   {
     label: "750 ml",
