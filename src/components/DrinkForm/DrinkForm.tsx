@@ -5,27 +5,17 @@ import "./DrinkForm.css";
 import QuantityChooser from "../QuantityChooser";
 
 const DrinkForm = ({ saveDrinkToArray }: any): JSX.Element => {
-  // TODO make this initial value null
   const [form, setForm] = useState<Drink>({});
-  // const [form, setForm] = useState<Drink>({
-  //   name: "",
-  //   quantity: 0,
-  //   alcoholContent: 0,
-  //   price: 1,
-  // });
-  const [score, setScore] = useState(0);
 
-  const updateScore = (drink: Drink): void => {
+  const calcScore = (drink: Drink): number => {
     // FIXME should this be fixed?
     if (drink.price && drink.quantity && drink.alcoholContent) {
-      setScore(
-        +(
-          (drink.price * 10000) /
-          (drink.quantity * drink.alcoholContent)
-        ).toFixed(0)
-      );
+      return +(
+        (drink.price * 10000) /
+        (drink.quantity * drink.alcoholContent)
+      ).toFixed(0);
     } else {
-      setScore(0);
+      return 0;
     }
   };
 
@@ -39,20 +29,18 @@ const DrinkForm = ({ saveDrinkToArray }: any): JSX.Element => {
       newValue = Number(event.currentTarget.value);
     }
     setForm({ ...form, [event.target.id]: newValue });
-    updateScore({ ...form, [event.target.id]: newValue });
   };
 
   // this could also be combined into the function above
+  // FIXME this makes QuantityChooser re-render every time the form changes: memo & useCallback?
   const handleQuantityChange = (value: number): void => {
     setForm({ ...form, quantity: value });
-    updateScore({ ...form, quantity: value });
-    // console.log(value);
+    console.log(`handling quantity change: ${value}`);
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    // updateScore(form); this might be unneccessary
-    saveDrinkToArray({ ...form, id: uuidv4(), score });
+    saveDrinkToArray({ ...form, id: uuidv4(), score: calcScore(form) });
   };
 
   return (
@@ -119,7 +107,7 @@ const DrinkForm = ({ saveDrinkToArray }: any): JSX.Element => {
         <button type="submit">Save</button>
       </form>
       <div id="score-div">
-        <h1>{score}</h1>
+        <h1>{calcScore(form)}</h1>
         <p>Ft / dl of pure alcohol</p>
       </div>
     </>
