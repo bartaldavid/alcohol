@@ -12,6 +12,7 @@ const LOCAL_STORAGE_KEY: string = "alcholapp.drinks";
 function App(): JSX.Element {
   const [drinks, setDrinks] = useState<StoredDrink[]>([]);
 
+  // TODO refractor this into a custom hook
   useEffect(() => {
     const storedDrinks: StoredDrink[] = JSON.parse(
       localStorage.getItem(LOCAL_STORAGE_KEY) ?? "{}"
@@ -23,6 +24,7 @@ function App(): JSX.Element {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(drinks));
   }, [drinks]);
 
+  // useCallback?
   const saveDrinkToArray = (currentDrink: StoredDrink): void => {
     setDrinks((prevDrinks) => [...prevDrinks, currentDrink]);
     // console.log(currentDrink);

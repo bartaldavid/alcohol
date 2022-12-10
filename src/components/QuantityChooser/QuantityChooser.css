@@ -1,5 +1,7 @@
 div.quantity-chooser {
-  padding: 0.7rem;
+  padding: 0.3rem 0;
+  flex-flow: row wrap;
+  justify-content: flex-start;
 }
 
 .quantity-chooser-button {

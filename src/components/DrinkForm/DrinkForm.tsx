@@ -33,6 +33,7 @@ const DrinkForm = ({ saveDrinkToArray }: any): JSX.Element => {
 
   // this could also be combined into the function above
   // FIXME this makes QuantityChooser re-render every time the form changes: memo & useCallback?
+  // useCallback works, but it makes score calculation not working
   const handleQuantityChange = (value: number): void => {
     setForm({ ...form, quantity: value });
     console.log(`handling quantity change: ${value}`);
