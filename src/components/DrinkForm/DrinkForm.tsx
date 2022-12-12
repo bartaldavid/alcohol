@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useCallback, useState } from "react";
 import Drink from "../../Drink";
 import { v4 as uuidv4 } from "uuid";
 import "./DrinkForm.css";
@@ -7,18 +7,14 @@ import QuantityChooser from "../QuantityChooser";
 const DrinkForm = ({ saveDrinkToArray }: any): JSX.Element => {
   const [form, setForm] = useState<Drink>({});
 
-  const calcScore = (drink: Drink): number => {
-    // FIXME should this be fixed?
-    if (drink.price && drink.quantity && drink.alcoholContent) {
-      return +(
-        (drink.price * 10000) /
-        (drink.quantity * drink.alcoholContent)
-      ).toFixed(0);
-    } else {
-      return 0;
-    }
-  };
+  const score =
+    form.price && form.quantity && form.alcoholContent
+      ? +((form.price * 10000) / (form.quantity * form.alcoholContent)).toFixed(
+          0
+        )
+      : 0;
 
+  // this probably could be simplified but removing type conversion makes score NaN
   const handleFormChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ): void => {
@@ -33,15 +29,17 @@ const DrinkForm = ({ saveDrinkToArray }: any): JSX.Element => {
 
   // this could also be combined into the function above
   // FIXME this makes QuantityChooser re-render every time the form changes: memo & useCallback?
-  // useCallback works, but it makes score calculation not working
-  const handleQuantityChange = (value: number): void => {
-    setForm({ ...form, quantity: value });
-    console.log(`handling quantity change: ${value}`);
-  };
+  const handleQuantityChange = useCallback(
+    function handleQuantityChange(value: number): void {
+      setForm({ ...form, quantity: value });
+      console.log(`handling quantity change: ${value}`);
+    },
+    [form.quantity]
+  );
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    saveDrinkToArray({ ...form, id: uuidv4(), score: calcScore(form) });
+    saveDrinkToArray({ ...form, id: uuidv4(), score });
   };
 
   return (
@@ -108,7 +106,7 @@ const DrinkForm = ({ saveDrinkToArray }: any): JSX.Element => {
         <button type="submit">Save</button>
       </form>
       <div id="score-div">
-        <h1>{calcScore(form)}</h1>
+        <h1>{score}</h1>
         <p>Ft / dl of pure alcohol</p>
       </div>
     </>

@@ -16,7 +16,6 @@ const QuantityChooser = memo(function QuantityChooser({
       <button
         type="button"
         onClick={() => handleQuantityChange(value.value)}
-        value={value.value}
         key={value.value}
         className="quantity-chooser-button"
       >
