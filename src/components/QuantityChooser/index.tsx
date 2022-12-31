@@ -20,7 +20,6 @@ const QuantityChooser = memo(function QuantityChooser({
         className="quantity-chooser-button"
       >
         <>
-          {/* TODO ettől telefonon nem responsive */}
           {value.logo}
           {value.label}
         </>

@@ -8,6 +8,7 @@ const DrinkForm = ({ saveDrinkToArray }: any): JSX.Element => {
   const [form, setForm] = useState<Drink>({});
 
   const score =
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     form.price && form.quantity && form.alcoholContent
       ? +((form.price * 10000) / (form.quantity * form.alcoholContent)).toFixed(
           0
@@ -18,13 +19,13 @@ const DrinkForm = ({ saveDrinkToArray }: any): JSX.Element => {
   const handleFormChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ): void => {
-    let newValue;
-    if (event.currentTarget.id === "name") {
-      newValue = event.currentTarget.value;
-    } else {
-      newValue = Number(event.currentTarget.value);
-    }
-    setForm({ ...form, [event.target.id]: newValue });
+    setForm({
+      ...form,
+      [event.target.id]:
+        event.currentTarget.id === "name"
+          ? event.currentTarget.value
+          : Number(event.currentTarget.value),
+    });
   };
 
   // this could also be combined into the function above
