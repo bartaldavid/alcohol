@@ -1,7 +1,8 @@
-import StoredDrink from "../../StoredDrink";
 import React from "react";
+import { StoredDrink } from "../../Drink";
 import "./DrinkCard.css";
 
+// TODO add a delete button
 const DrinkCard: React.FC<{ drink: StoredDrink }> = ({ drink }) => {
   return (
     <div className="drink-card">
