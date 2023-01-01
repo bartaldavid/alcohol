@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import StoredDrink from "../StoredDrink";
+import { StoredDrink } from "../Drink";
 
 export default function useSavedState(
   defaultValue: StoredDrink[],

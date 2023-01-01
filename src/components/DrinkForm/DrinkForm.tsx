@@ -1,11 +1,15 @@
-import React, { FormEvent, useCallback, useState } from "react";
-import Drink from "../../Drink";
-import { v4 as uuidv4 } from "uuid";
+import React, { FormEvent, useCallback, useRef, useState } from "react";
+import { Drink, StoredDrink } from "../../Drink";
 import "./DrinkForm.css";
 import QuantityChooser from "../QuantityChooser";
 
-const DrinkForm = ({ saveDrinkToArray }: any): JSX.Element => {
+interface Props {
+  saveDrinkToArray: (drink: StoredDrink) => void;
+}
+
+const DrinkForm = ({ saveDrinkToArray }: Props): JSX.Element => {
   const [form, setForm] = useState<Drink>({});
+  const nameInputRef = useRef<HTMLInputElement>(null);
 
   const score =
     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
@@ -15,16 +19,12 @@ const DrinkForm = ({ saveDrinkToArray }: any): JSX.Element => {
         )
       : 0;
 
-  // this probably could be simplified but removing type conversion makes score NaN
   const handleFormChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ): void => {
     setForm({
       ...form,
-      [event.target.id]:
-        event.currentTarget.id === "name"
-          ? event.currentTarget.value
-          : Number(event.currentTarget.value),
+      [event.target.id]: +event.currentTarget.value,
     });
   };
 
@@ -40,7 +40,12 @@ const DrinkForm = ({ saveDrinkToArray }: any): JSX.Element => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    saveDrinkToArray({ ...form, id: uuidv4(), score });
+    saveDrinkToArray({
+      ...form,
+      id: crypto.randomUUID(),
+      score,
+      name: nameInputRef.current?.value,
+    });
   };
 
   return (
@@ -52,9 +57,9 @@ const DrinkForm = ({ saveDrinkToArray }: any): JSX.Element => {
             <input
               type="text"
               id="name"
-              value={form.name}
               onChange={handleFormChange}
               autoComplete="off"
+              ref={nameInputRef}
             />
           </div>
         </div>

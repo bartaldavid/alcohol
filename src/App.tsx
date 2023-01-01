@@ -3,7 +3,7 @@ import "normalize.css";
 import "./App.css";
 import DrinkForm from "./components/DrinkForm/DrinkForm";
 import DrinkCard from "./components/DrinkCard/DrinkCard";
-import StoredDrink from "./StoredDrink";
+import { StoredDrink } from "./Drink";
 import useSavedState from "./hooks/useSavedState";
 import { GiTrashCan } from "react-icons/gi";
 
